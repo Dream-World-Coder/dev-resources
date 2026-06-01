@@ -1,4 +1,4 @@
-> Original Upload: https://www.opencanvas.institute/p/wanna-learn-web-development-6a19a10bc7d49a7b9a4eda21
+> Original article: https://www.opencanvas.institute/p/wanna-learn-web-development-6a19a10bc7d49a7b9a4eda21
 
 So you want to start web dev. Nice :)
 What kind of developer you wanna be? 
