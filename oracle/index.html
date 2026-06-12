@@ -1,0 +1,2994 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Oracle Guide</title>
+        <style>
+            :root {
+                --font-sans: "Arial", sans-serif;
+                --color-text-primary: #111;
+                --color-text-secondary: #444;
+            }
+            * {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+            }
+            body {
+                font-family: var(--font-sans);
+            }
+            main {
+                max-width: 800px;
+                margin-left: auto;
+                margin-right: auto;
+                padding: 30px 30px 60px 30px;
+            }
+            .hero {
+                padding: 2rem 0 1.5rem;
+                border-bottom: 0.5px solid var(--color-border-tertiary);
+            }
+            .hero-tag {
+                font-size: 12px;
+                font-weight: 500;
+                letter-spacing: 0.08em;
+                text-transform: uppercase;
+                color: var(--color-text-secondary);
+                margin-bottom: 0.5rem;
+            }
+            .hero-title {
+                font-size: 26px;
+                font-weight: 500;
+                color: var(--color-text-primary);
+                line-height: 1.2;
+                margin-bottom: 0.5rem;
+            }
+            .hero-sub {
+                font-size: 15px;
+                color: var(--color-text-secondary);
+                line-height: 1.6;
+            }
+            .nav-bar {
+                display: flex;
+                gap: 6px;
+                flex-wrap: wrap;
+                padding: 1rem 0;
+                border-bottom: 0.5px solid var(--color-border-tertiary);
+                margin-bottom: 1.5rem;
+                border: 1px solid black;
+                border-radius: 20px;
+                color: blue;
+            }
+            .nav-btn {
+                font-size: 12px;
+                padding: 5px 12px;
+                border: 0.5px solid var(--color-border-secondary);
+                border-radius: var(--border-radius-md);
+                background: var(--color-background-primary);
+                color: blue;
+                cursor: pointer;
+                transition: all 0.15s;
+            }
+            .module-panel {
+                display: none;
+            }
+            .module-panel.active {
+                display: block;
+            }
+            .section {
+                margin-bottom: 2rem;
+            }
+            .sec-label {
+                font-size: 11px;
+                font-weight: 500;
+                letter-spacing: 0.07em;
+                text-transform: uppercase;
+                color: var(--color-text-tertiary);
+                margin-bottom: 0.6rem;
+            }
+            .sec-title {
+                font-size: 17px;
+                font-weight: 500;
+                color: var(--color-text-primary);
+                margin-bottom: 0.75rem;
+            }
+            .prose {
+                font-size: 15px;
+                color: var(--color-text-secondary);
+                line-height: 1.75;
+                margin-bottom: 0.75rem;
+            }
+            .analogy-box {
+                background: var(--color-background-secondary);
+                border-left: 3px solid #185fa5;
+                border-radius: 0 var(--border-radius-md) var(--border-radius-md)
+                    0;
+                padding: 0.85rem 1rem;
+                margin-bottom: 1rem;
+            }
+            .analogy-box .label {
+                font-size: 11px;
+                font-weight: 500;
+                letter-spacing: 0.06em;
+                text-transform: uppercase;
+                color: #185fa5;
+                margin-bottom: 0.3rem;
+            }
+            .analogy-box p {
+                font-size: 14px;
+                color: var(--color-text-secondary);
+                line-height: 1.65;
+            }
+            .concept-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 10px;
+                margin-bottom: 1rem;
+            }
+            .concept-card {
+                background: var(--color-background-primary);
+                border: 0.5px solid var(--color-border-tertiary);
+                border-radius: var(--border-radius-lg);
+                padding: 0.85rem 1rem;
+            }
+            .concept-card .ctitle {
+                font-size: 13px;
+                font-weight: 500;
+                color: var(--color-text-primary);
+                margin-bottom: 0.3rem;
+            }
+            .concept-card .cdesc {
+                font-size: 13px;
+                color: var(--color-text-secondary);
+                line-height: 1.55;
+            }
+            .concept-card .cicon {
+                font-size: 20px;
+                margin-bottom: 0.4rem;
+                color: #185fa5;
+            }
+            .quiz-section {
+                background: var(--color-background-secondary);
+                border-radius: var(--border-radius-lg);
+                padding: 1.1rem 1.25rem;
+                margin-bottom: 1rem;
+            }
+            .quiz-section .qlabel {
+                font-size: 11px;
+                font-weight: 500;
+                letter-spacing: 0.07em;
+                text-transform: uppercase;
+                color: var(--color-text-tertiary);
+                margin-bottom: 0.75rem;
+            }
+            .quiz-q {
+                font-size: 14px;
+                color: var(--color-text-primary);
+                margin-bottom: 0.5rem;
+                padding-left: 0.75rem;
+                border-left: 2px solid var(--color-border-secondary);
+                line-height: 1.5;
+            }
+            .reveal-btn {
+                font-size: 13px;
+                margin-top: 0.75rem;
+                padding: 6px 14px;
+                border: 0.5px solid var(--color-border-secondary);
+                border-radius: var(--border-radius-md);
+                background: var(--color-background-primary);
+                color: var(--color-text-secondary);
+                cursor: pointer;
+            }
+            .reveal-btn:hover {
+                background: var(--color-background-secondary);
+            }
+            .answer-box {
+                display: none;
+                margin-top: 0.75rem;
+                padding: 0.75rem 1rem;
+                background: var(--color-background-primary);
+                border-radius: var(--border-radius-md);
+                border: 0.5px solid var(--color-border-tertiary);
+            }
+            .answer-box.open {
+                display: block;
+            }
+            .answer-item {
+                font-size: 13px;
+                color: var(--color-text-secondary);
+                line-height: 1.65;
+                margin-bottom: 0.4rem;
+                padding-left: 0.6rem;
+            }
+            .anchor-box {
+                background: var(--color-background-primary);
+                border: 0.5px solid var(--color-border-tertiary);
+                border-radius: var(--border-radius-lg);
+                padding: 0.9rem 1.1rem;
+                margin-bottom: 1rem;
+                display: flex;
+                gap: 0.75rem;
+                align-items: flex-start;
+            }
+            .anchor-box .aicon {
+                font-size: 22px;
+                color: #1d9e75;
+                flex-shrink: 0;
+                margin-top: 2px;
+            }
+            .anchor-box .atxt {
+                font-size: 14px;
+                color: var(--color-text-secondary);
+                line-height: 1.6;
+            }
+            .anchor-box .atxt strong {
+                color: var(--color-text-primary);
+                font-weight: 500;
+            }
+            .curiosity-box {
+                background: var(--color-background-primary);
+                border: 0.5px solid var(--color-border-tertiary);
+                border-radius: var(--border-radius-lg);
+                padding: 0.9rem 1.1rem;
+                margin-bottom: 1rem;
+                display: flex;
+                gap: 0.75rem;
+                align-items: flex-start;
+            }
+            .curiosity-box .cqicon {
+                font-size: 22px;
+                color: #d85a30;
+                flex-shrink: 0;
+                margin-top: 2px;
+            }
+            .revisit-row {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 8px;
+                margin-bottom: 1rem;
+            }
+            .revisit-chip {
+                font-size: 12px;
+                padding: 4px 10px;
+                border-radius: var(--border-radius-md);
+                background: var(--color-background-secondary);
+                color: var(--color-text-secondary);
+                border: 0.5px solid var(--color-border-tertiary);
+            }
+            .resource-card {
+                background: var(--color-background-primary);
+                border: 0.5px solid var(--color-border-tertiary);
+                border-radius: var(--border-radius-lg);
+                padding: 0.85rem 1rem;
+                margin-bottom: 0.65rem;
+            }
+            .resource-card .rtag {
+                font-size: 10px;
+                font-weight: 500;
+                letter-spacing: 0.07em;
+                text-transform: uppercase;
+                padding: 3px 8px;
+                border-radius: var(--border-radius-md);
+                margin-bottom: 0.5rem;
+                display: inline-block;
+            }
+            .rtag-free {
+                background: #eaf3de;
+                color: #3b6d11;
+            }
+            .rtag-video {
+                background: #faece7;
+                color: #993c1d;
+            }
+            .rtag-docs {
+                background: #e6f1fb;
+                color: #185fa5;
+            }
+            .rtag-lab {
+                background: #eeedfe;
+                color: #534ab7;
+            }
+            .resource-card .rname {
+                font-size: 14px;
+                font-weight: 500;
+                color: var(--color-text-primary);
+                margin-bottom: 0.3rem;
+            }
+            .resource-card .rdesc {
+                font-size: 13px;
+                color: var(--color-text-secondary);
+                line-height: 1.55;
+                margin-bottom: 0.4rem;
+            }
+            .resource-card .rtime {
+                font-size: 12px;
+                color: var(--color-text-tertiary);
+            }
+            .resource-card a {
+                font-size: 13px;
+                color: #185fa5;
+                text-decoration: none;
+                word-break: break-all;
+            }
+            .resource-card a:hover {
+                text-decoration: underline;
+            }
+            .divider {
+                height: 0.5px;
+                background: var(--color-border-tertiary);
+                margin: 1.75rem 0;
+            }
+            .meta-row {
+                display: flex;
+                gap: 1rem;
+                flex-wrap: wrap;
+                margin-bottom: 1.25rem;
+            }
+            .meta-pill {
+                font-size: 12px;
+                color: var(--color-text-secondary);
+                display: flex;
+                align-items: center;
+                gap: 5px;
+            }
+            .meta-pill i {
+                font-size: 15px;
+                color: var(--color-text-tertiary);
+            }
+            .eco-grid {
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 10px;
+                margin-bottom: 1rem;
+            }
+            .eco-row {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                background: var(--color-background-secondary);
+                border-radius: var(--border-radius-md);
+                padding: 0.7rem 0.9rem;
+            }
+            .eco-box {
+                font-size: 13px;
+                font-weight: 500;
+                padding: 6px 12px;
+                border-radius: var(--border-radius-md);
+                min-width: 120px;
+                text-align: center;
+            }
+            .eco-arrow {
+                font-size: 18px;
+                color: var(--color-text-tertiary);
+            }
+            .eco-desc {
+                font-size: 13px;
+                color: var(--color-text-secondary);
+                line-height: 1.5;
+            }
+            .glossary-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+                gap: 8px;
+                margin-bottom: 1rem;
+            }
+            .gloss-item {
+                background: var(--color-background-secondary);
+                border-radius: var(--border-radius-md);
+                padding: 0.7rem 0.85rem;
+            }
+            .gloss-term {
+                font-size: 13px;
+                font-weight: 500;
+                color: var(--color-text-primary);
+                margin-bottom: 0.2rem;
+            }
+            .gloss-def {
+                font-size: 13px;
+                color: var(--color-text-secondary);
+                line-height: 1.55;
+            }
+            .month-card {
+                background: var(--color-background-primary);
+                border: 0.5px solid var(--color-border-tertiary);
+                border-radius: var(--border-radius-lg);
+                padding: 0.9rem 1.1rem;
+                margin-bottom: 0.75rem;
+            }
+            .month-card .mhead {
+                font-size: 14px;
+                font-weight: 500;
+                color: var(--color-text-primary);
+                margin-bottom: 0.5rem;
+            }
+            .month-card .mbody {
+                font-size: 13px;
+                color: var(--color-text-secondary);
+                line-height: 1.65;
+            }
+            .cert-row {
+                display: flex;
+                flex-direction: column;
+                gap: 0.5rem;
+                margin-bottom: 1rem;
+            }
+            .cert-item {
+                font-size: 13px;
+                color: var(--color-text-secondary);
+                display: flex;
+                gap: 0.5rem;
+                align-items: flex-start;
+                line-height: 1.55;
+            }
+            .cert-item i {
+                font-size: 15px;
+                color: #1d9e75;
+                margin-top: 2px;
+                flex-shrink: 0;
+            }
+            .teach-box {
+                background: var(--color-background-secondary);
+                border-radius: var(--border-radius-lg);
+                padding: 0.9rem 1.1rem;
+                margin-bottom: 1rem;
+                border-left: 3px solid #d85a30;
+            }
+            .teach-box .tlabel {
+                font-size: 11px;
+                font-weight: 500;
+                letter-spacing: 0.07em;
+                text-transform: uppercase;
+                color: #d85a30;
+                margin-bottom: 0.4rem;
+            }
+            .teach-box .tbody {
+                font-size: 14px;
+                color: var(--color-text-secondary);
+                line-height: 1.65;
+            }
+            .progress-bar {
+                height: 3px;
+                background: var(--color-border-tertiary);
+                border-radius: 2px;
+                margin-bottom: 1.5rem;
+                overflow: hidden;
+            }
+            .progress-fill {
+                height: 100%;
+                background: #185fa5;
+                border-radius: 2px;
+                transition: width 0.3s;
+            }
+            .big-pill {
+                display: inline-flex;
+                align-items: center;
+                gap: 6px;
+                background: var(--color-background-info);
+                color: #0c447c;
+                font-size: 13px;
+                font-weight: 500;
+                padding: 5px 12px;
+                border-radius: 20px;
+                margin-bottom: 1rem;
+            }
+            .warn-fact {
+                background: #faeeda;
+                border-radius: var(--border-radius-md);
+                padding: 0.65rem 0.85rem;
+                margin-bottom: 0.65rem;
+            }
+            .warn-fact p {
+                font-size: 13px;
+                color: #633806;
+                line-height: 1.55;
+            }
+        </style>
+    </head>
+    <body>
+        <main class="">
+            <div class="hero">
+                <div class="hero-tag">
+                    Intern Learning Guide · Oracle Analytics
+                </div>
+                <div class="hero-title">
+                    Oracle FDI & OAC — From Zero to Useful
+                </div>
+                <div class="hero-sub">
+                    5 modules · free resources · quizzes · spaced repetition ·
+                    6-month post-internship plan
+                </div>
+            </div>
+
+            <div class="nav-bar">
+                <button class="nav-btn active" onclick="showModule('m0')">
+                    Module 0 — Big Picture
+                </button>
+                <button class="nav-btn" onclick="showModule('m1')">
+                    Module 1 — OAC
+                </button>
+                <button class="nav-btn" onclick="showModule('m2')">
+                    Module 2 — FDI / FAW
+                </button>
+                <button class="nav-btn" onclick="showModule('m3')">
+                    Module 3 — Together
+                </button>
+                <button class="nav-btn" onclick="showModule('m4')">
+                    Module 4 — Hands-On
+                </button>
+                <button class="nav-btn" onclick="showModule('post')">
+                    Post-Internship Plan
+                </button>
+            </div>
+
+            <div id="m0" class="module-panel active">
+                <div class="meta-row">
+                    <span class="meta-pill"
+                        ><i class="ti ti-clock" aria-hidden="true"></i> 3–4
+                        hours</span
+                    >
+                    <span class="meta-pill"
+                        ><i class="ti ti-award" aria-hidden="true"></i> Do this
+                        first — before anything else</span
+                    >
+                </div>
+
+                <div class="section">
+                    <div class="sec-label">What is enterprise analytics?</div>
+                    <p class="prose">
+                        Imagine a massive supermarket chain with 500 stores,
+                        10,000 employees, and millions of transactions every
+                        day. The CEO asks: "Which stores are losing money, and
+                        why?" There's no way she can open every receipt. A
+                        company needs software that automatically collects all
+                        that data, organises it, and presents the answer as a
+                        clean chart in seconds. That software is enterprise data
+                        analytics.
+                    </p>
+                    <div class="analogy-box">
+                        <div class="label">Analogy</div>
+                        <p>
+                            Think of enterprise analytics like Google Maps for a
+                            business. Raw data (streets, GPS pings, traffic) =
+                            the company's numbers. Google Maps = the analytics
+                            software. The route shown on screen = the answer to
+                            "why did costs go up last quarter?"
+                        </p>
+                    </div>
+                    <p class="prose">
+                        Large companies need it because humans simply cannot
+                        read millions of rows of spreadsheet data. Analytics
+                        software turns mountains of numbers into decisions.
+                    </p>
+                </div>
+
+                <div class="section">
+                    <div class="sec-label">Oracle as a company</div>
+                    <p class="prose">
+                        Oracle Corporation (founded 1977) is one of the largest
+                        technology companies on Earth. Their main business:
+                        software and databases that run inside large companies —
+                        banks, hospitals, governments, retailers. Think of
+                        Oracle as the "plumbing company" of the enterprise
+                        world. Most big companies have Oracle software quietly
+                        running their HR, finance, and supply chains, even if
+                        employees never see the Oracle name.
+                    </p>
+                    <p class="prose">
+                        Within Oracle's product family, the two tools you're
+                        learning sit here:
+                    </p>
+                    <div class="concept-grid">
+                        <div class="concept-card">
+                            <div class="ctitle">
+                                Oracle Fusion ERP / HCM / SCM
+                            </div>
+                            <div class="cdesc">
+                                The source — the actual business systems where
+                                HR, Finance, and Supply Chain teams do their
+                                daily work. This is where all the data lives.
+                            </div>
+                        </div>
+                        <div class="concept-card">
+                            <div class="ctitle">
+                                Fusion Data Intelligence (FDI)
+                            </div>
+                            <div class="cdesc">
+                                The smart connector — pre-built analytics that
+                                pulls data out of Fusion apps and makes it
+                                analysis-ready instantly. Like a pre-wired
+                                electrical panel.
+                            </div>
+                        </div>
+                        <div class="concept-card">
+                            <div class="ctitle">
+                                Oracle Analytics Cloud (OAC)
+                            </div>
+                            <div class="ctitle"></div>
+                            <div class="cdesc">
+                                The canvas — the visualisation and reporting
+                                tool where humans actually see charts,
+                                dashboards, and insights. FDI runs on top of
+                                OAC.
+                            </div>
+                        </div>
+                        <div class="concept-card">
+                            <div class="ctitle">
+                                Autonomous Data Warehouse (ADW)
+                            </div>
+                            <div class="cdesc">
+                                The storage vault — a cloud database that holds
+                                all the processed data, sitting between the
+                                Fusion source and OAC's dashboards.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="sec-label">
+                        Ecosystem map — how everything connects
+                    </div>
+                    <div class="eco-grid">
+                        <div class="eco-row">
+                            <div
+                                class="eco-box"
+                                style="background: #e6f1fb; color: #0c447c"
+                            >
+                                Oracle Fusion Apps<br /><span
+                                    style="font-size: 11px; font-weight: 400"
+                                    >(ERP, HCM, SCM, CX)</span
+                                >
+                            </div>
+                            <div class="eco-arrow">
+                                <i
+                                    class="ti ti-arrow-right"
+                                    aria-hidden="true"
+                                ></i>
+                            </div>
+                            <div class="eco-desc">
+                                Daily business data is created here: payroll
+                                runs, invoices paid, products shipped. This is
+                                the raw source.
+                            </div>
+                        </div>
+                        <div class="eco-row">
+                            <div
+                                class="eco-box"
+                                style="background: #eeedfe; color: #3c3489"
+                            >
+                                FDI Pipeline<br /><span
+                                    style="font-size: 11px; font-weight: 400"
+                                    >(extract + transform)</span
+                                >
+                            </div>
+                            <div class="eco-arrow">
+                                <i
+                                    class="ti ti-arrow-right"
+                                    aria-hidden="true"
+                                ></i>
+                            </div>
+                            <div class="eco-desc">
+                                FDI automatically pulls that data, cleans it,
+                                restructures it for analysis, and loads it into
+                                the data warehouse overnight.
+                            </div>
+                        </div>
+                        <div class="eco-row">
+                            <div
+                                class="eco-box"
+                                style="background: #e1f5ee; color: #085041"
+                            >
+                                Autonomous Data<br />Warehouse (ADW)
+                            </div>
+                            <div class="eco-arrow">
+                                <i
+                                    class="ti ti-arrow-right"
+                                    aria-hidden="true"
+                                ></i>
+                            </div>
+                            <div class="eco-desc">
+                                A clean, well-organised cloud database — the
+                                "well-stocked library" where all analysis-ready
+                                data lives.
+                            </div>
+                        </div>
+                        <div class="eco-row">
+                            <div
+                                class="eco-box"
+                                style="background: #faece7; color: #712b13"
+                            >
+                                OAC Dashboards<br /><span
+                                    style="font-size: 11px; font-weight: 400"
+                                    >(what you see)</span
+                                >
+                            </div>
+                            <div class="eco-arrow" style="visibility: hidden">
+                                <i
+                                    class="ti ti-arrow-right"
+                                    aria-hidden="true"
+                                ></i>
+                            </div>
+                            <div class="eco-desc">
+                                The Finance Manager opens their browser, clicks
+                                a KPI card, and sees exactly what changed — no
+                                SQL required.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="sec-label">
+                        Key vocabulary — plain English glossary
+                    </div>
+                    <div class="glossary-grid">
+                        <div class="gloss-item">
+                            <div class="gloss-term">Data Warehouse</div>
+                            <div class="gloss-def">
+                                A well-organised digital library where a company
+                                stores all its historical data, sorted and
+                                indexed for fast searching. Not where people
+                                work — where data is kept for analysis.
+                            </div>
+                        </div>
+                        <div class="gloss-item">
+                            <div class="gloss-term">KPI</div>
+                            <div class="gloss-def">
+                                Key Performance Indicator — a single important
+                                number a company tracks, like "monthly revenue"
+                                or "employee turnover rate." The score on the
+                                scoreboard.
+                            </div>
+                        </div>
+                        <div class="gloss-item">
+                            <div class="gloss-term">Dashboard</div>
+                            <div class="gloss-def">
+                                A single screen showing multiple charts and KPIs
+                                at once, like a car's instrument cluster. Gives
+                                a quick visual health-check of the business.
+                            </div>
+                        </div>
+                        <div class="gloss-item">
+                            <div class="gloss-term">ETL</div>
+                            <div class="gloss-def">
+                                Extract, Transform, Load — the process of
+                                pulling raw data from source systems,
+                                cleaning/reshaping it, and loading it into a
+                                warehouse. Like sorting mail: collect it, sort
+                                it, file it.
+                            </div>
+                        </div>
+                        <div class="gloss-item">
+                            <div class="gloss-term">Cloud</div>
+                            <div class="gloss-def">
+                                Software running on servers owned by someone
+                                else (Oracle, in this case), accessed via the
+                                internet. You don't install anything; you just
+                                log in through a browser.
+                            </div>
+                        </div>
+                        <div class="gloss-item">
+                            <div class="gloss-term">SaaS</div>
+                            <div class="gloss-def">
+                                Software as a Service — you subscribe to use
+                                software like a Netflix subscription, instead of
+                                buying a CD and installing it. Oracle Fusion
+                                apps are SaaS.
+                            </div>
+                        </div>
+                        <div class="gloss-item">
+                            <div class="gloss-term">Pre-built Analytics</div>
+                            <div class="gloss-def">
+                                Dashboards and reports that come ready-made,
+                                like IKEA furniture — someone else designed the
+                                data model and charts; you just configure and
+                                use them.
+                            </div>
+                        </div>
+                        <div class="gloss-item">
+                            <div class="gloss-term">Semantic Model</div>
+                            <div class="gloss-def">
+                                A translation layer that explains what data
+                                means in business terms. It converts "column
+                                ID_7742" into "Employee Hire Date" so
+                                non-technical users understand what they're
+                                looking at.
+                            </div>
+                        </div>
+                        <div class="gloss-item">
+                            <div class="gloss-term">Subject Area</div>
+                            <div class="gloss-def">
+                                A pre-organised collection of related data
+                                fields, like a chapter in a textbook. "Payroll
+                                Subject Area" contains every field you'd need to
+                                analyse pay data.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="sec-label">Free resources for Module 0</div>
+                    <div class="resource-card">
+                        <span class="rtag rtag-free">Free Course</span>
+                        <div class="rname">
+                            Oracle Analytics Cloud Foundations — Oracle
+                            University
+                        </div>
+                        <div class="rdesc">
+                            When you open this page you'll see a course catalog
+                            with filter options on the left. Search "Oracle
+                            Analytics Cloud" in the search bar and select the
+                            free "Foundations" learning path. The page shows a
+                            list of lessons, an estimated duration, and a
+                            "Start" button.
+                        </div>
+                        <a
+                            href="https://education.oracle.com/oracle-analytics-cloud/pFamily_657"
+                            target="_blank"
+                            >https://education.oracle.com/oracle-analytics-cloud/pFamily_657</a
+                        >
+                        <div class="rtime">
+                            <i
+                                class="ti ti-clock"
+                                aria-hidden="true"
+                                style="font-size: 13px"
+                            ></i>
+                            ~2 hours
+                        </div>
+                    </div>
+                    <div class="resource-card">
+                        <span class="rtag rtag-video">YouTube</span>
+                        <div class="rname">
+                            Oracle Analytics — Official Oracle YouTube Channel
+                        </div>
+                        <div class="rdesc">
+                            Search "Oracle Analytics" on YouTube and look for
+                            the official Oracle channel (blue tick, "Oracle"
+                            username). Their playlist "Oracle Analytics Cloud —
+                            Getting Started" has ~10 short videos, each 5–15
+                            min. The thumbnail shows the OAC logo and a
+                            split-screen of the UI.
+                        </div>
+                        <a
+                            href="https://www.youtube.com/@Oracle"
+                            target="_blank"
+                            >https://www.youtube.com/@Oracle</a
+                        >
+                        <div class="rtime">
+                            <i
+                                class="ti ti-clock"
+                                aria-hidden="true"
+                                style="font-size: 13px"
+                            ></i>
+                            ~2 hours total
+                        </div>
+                    </div>
+                    <div class="resource-card">
+                        <span class="rtag rtag-docs">Official Docs</span>
+                        <div class="rname">
+                            Oracle Analytics Cloud — Getting Started Guide
+                        </div>
+                        <div class="rdesc">
+                            The page opens with a white/grey Oracle docs layout.
+                            The left panel shows a navigation tree; the main
+                            body starts with "About Oracle Analytics Cloud"
+                            followed by an architecture diagram. You're in the
+                            right place if you see "What's New" and "Key
+                            Features" sections in the left nav.
+                        </div>
+                        <a
+                            href="https://docs.oracle.com/en/cloud/paas/analytics-cloud/acsom/index.html"
+                            target="_blank"
+                            >https://docs.oracle.com/en/cloud/paas/analytics-cloud/acsom/index.html</a
+                        >
+                        <div class="rtime">
+                            <i
+                                class="ti ti-clock"
+                                aria-hidden="true"
+                                style="font-size: 13px"
+                            ></i>
+                            45 min browse
+                        </div>
+                    </div>
+                    <div class="resource-card">
+                        <span class="rtag rtag-lab">LiveLabs</span>
+                        <div class="rname">
+                            Get Started with Oracle Analytics Cloud
+                        </div>
+                        <div class="rdesc">
+                            Go to
+                            apexapps.oracle.com/pls/apex/dbpm/r/livelabs/home
+                            and search "Oracle Analytics Cloud." The card for
+                            "Get Started with Oracle Analytics Cloud" shows a
+                            green "Start" button, estimated time of 2 hours, and
+                            a list of lab steps visible in the preview. It's
+                            free and runs in your browser.
+                        </div>
+                        <a
+                            href="https://apexapps.oracle.com/pls/apex/dbpm/r/livelabs/view-workshop?wid=3281"
+                            target="_blank"
+                            >https://apexapps.oracle.com/pls/apex/dbpm/r/livelabs/view-workshop?wid=3281</a
+                        >
+                        <div class="rtime">
+                            <i
+                                class="ti ti-clock"
+                                aria-hidden="true"
+                                style="font-size: 13px"
+                            ></i>
+                            2 hours
+                        </div>
+                    </div>
+                </div>
+
+                <div class="anchor-box">
+                    <i class="ti ti-brain aicon" aria-hidden="true"></i>
+                    <div class="atxt">
+                        <strong>Memory anchor:</strong> "Oracle Fusion is the
+                        factory floor. The data warehouse is the filing room.
+                        OAC is the window where the CEO watches it all on a
+                        screen."
+                    </div>
+                </div>
+                <div class="curiosity-box">
+                    <i class="ti ti-bulb cqicon" aria-hidden="true"></i>
+                    <div class="atxt">
+                        <strong>Curiosity question:</strong> Oracle's database
+                        software quietly powers over 430,000 customers worldwide
+                        — including most of the world's top banks and airlines.
+                        How many times today did your own data pass through an
+                        Oracle system without you knowing?
+                    </div>
+                </div>
+                <div class="sec-label" style="margin-bottom: 0.4rem">
+                    Revisit on:
+                </div>
+                <div class="revisit-row">
+                    <span class="revisit-chip">Day 1 (today)</span>
+                    <span class="revisit-chip">Day 3</span>
+                    <span class="revisit-chip">Day 7</span>
+                    <span class="revisit-chip">Week 3</span>
+                    <span class="revisit-chip">Month 2</span>
+                </div>
+
+                <div class="quiz-section">
+                    <div class="qlabel">
+                        Active recall quiz — answer from memory
+                    </div>
+                    <div class="quiz-q">
+                        1. Explain in one sentence what a data warehouse is,
+                        using the library analogy.
+                    </div>
+                    <div class="quiz-q">
+                        2. What does ETL stand for, and what does each step mean
+                        in plain English?
+                    </div>
+                    <div class="quiz-q">
+                        3. What is the difference between FDI and OAC? Which one
+                        is built on top of the other?
+                    </div>
+                    <div class="quiz-q">
+                        4. What does KPI stand for? Name two KPIs a retail
+                        company might track.
+                    </div>
+                    <div class="quiz-q">
+                        5. Why can't a large company just use Excel for all its
+                        analytics?
+                    </div>
+                    <button class="reveal-btn" onclick="toggleAnswers('a0')">
+                        Show sample answers
+                    </button>
+                    <div id="a0" class="answer-box">
+                        <div class="answer-item">
+                            1. A data warehouse is like a well-organised library
+                            — instead of books, it stores all a company's
+                            historical data in labelled, indexed form so you can
+                            find any "book" instantly.
+                        </div>
+                        <div class="answer-item">
+                            2. ETL = Extract (copy raw data from the source),
+                            Transform (clean and reshape it), Load (put it into
+                            the warehouse). Like collecting mail, sorting it,
+                            then filing it.
+                        </div>
+                        <div class="answer-item">
+                            3. FDI is the smart pipeline + pre-built analytics
+                            layer. OAC is the visualisation and reporting tool.
+                            FDI is built on top of OAC — it uses OAC as its
+                            display engine.
+                        </div>
+                        <div class="answer-item">
+                            4. KPI = Key Performance Indicator. Retail KPIs:
+                            monthly revenue, customer return rate, inventory
+                            shrinkage, average basket size.
+                        </div>
+                        <div class="answer-item">
+                            5. Excel breaks down with millions of rows, can't
+                            refresh automatically from live sources, has no
+                            role-based security, can't be shared reliably at
+                            scale, and has no pre-built business logic.
+                        </div>
+                    </div>
+                </div>
+                <div class="teach-box">
+                    <div class="tlabel">Teach it back challenge</div>
+                    <div class="tbody">
+                        Set a 2-minute timer. Explain out loud to an imaginary
+                        colleague: "What is Oracle Analytics, and how do FDI and
+                        OAC fit together?" Use the ecosystem map as your guide.
+                        If you get stuck, that's the thing to re-read.
+                    </div>
+                </div>
+            </div>
+
+            <div id="m1" class="module-panel">
+                <div class="meta-row">
+                    <span class="meta-pill"
+                        ><i class="ti ti-clock" aria-hidden="true"></i> 5–6
+                        hours</span
+                    >
+                    <span class="meta-pill"
+                        ><i class="ti ti-flag" aria-hidden="true"></i> Start
+                        here before Module 2</span
+                    >
+                </div>
+
+                <div class="section">
+                    <div class="sec-label">What problem does OAC solve?</div>
+                    <p class="prose">
+                        Imagine you're a Sales Manager. Your data lives in five
+                        different places: a CRM system, an Excel file your
+                        colleague emailed, a database in IT, an old spreadsheet
+                        from 2022, and a dashboard someone built in PowerPoint.
+                        Every Monday you spend 3 hours copy-pasting these
+                        together. OAC is the tool that connects to all those
+                        sources at once, lets you drag and drop charts in
+                        minutes, and shares a live, auto-refreshing dashboard
+                        with your whole team — so Monday mornings are about
+                        decisions, not data wrangling.
+                    </p>
+                </div>
+
+                <div class="section">
+                    <div class="sec-label">
+                        How OAC compares to tools you may have heard of
+                    </div>
+                    <div class="concept-grid">
+                        <div class="concept-card">
+                            <div class="ctitle">vs Excel</div>
+                            <div class="cdesc">
+                                Excel is for individual analysis on small data.
+                                OAC handles millions of rows, live data
+                                connections, and team-wide sharing. Excel
+                                breaks; OAC scales.
+                            </div>
+                        </div>
+                        <div class="concept-card">
+                            <div class="ctitle">vs Power BI</div>
+                            <div class="cdesc">
+                                Both do similar things. OAC integrates tightly
+                                with Oracle databases and Oracle Fusion apps. If
+                                your company runs on Oracle, OAC is the native
+                                choice — like using Apple Maps on an iPhone.
+                            </div>
+                        </div>
+                        <div class="concept-card">
+                            <div class="ctitle">vs Tableau</div>
+                            <div class="cdesc">
+                                Tableau has a stronger reputation for visual
+                                design flexibility. OAC has deeper Oracle
+                                database connectivity and includes AI/ML
+                                features natively. Companies in the Oracle
+                                ecosystem choose OAC.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="sec-label">
+                        5 things OAC can do that matter most for an intern
+                    </div>
+                    <div class="concept-grid">
+                        <div class="concept-card">
+                            <i
+                                class="ti ti-chart-bar cicon"
+                                aria-hidden="true"
+                            ></i>
+                            <div class="ctitle">1. Connect to data sources</div>
+                            <div class="cdesc">
+                                Connect to databases, files, cloud apps — like
+                                plugging different appliances into a power
+                                strip.
+                            </div>
+                        </div>
+                        <div class="concept-card">
+                            <i
+                                class="ti ti-drag-drop cicon"
+                                aria-hidden="true"
+                            ></i>
+                            <div class="ctitle">
+                                2. Drag-and-drop visualisations
+                            </div>
+                            <div class="cdesc">
+                                Build charts by dragging fields onto a canvas.
+                                No code. Like assembling LEGO with data.
+                            </div>
+                        </div>
+                        <div class="concept-card">
+                            <i class="ti ti-share cicon" aria-hidden="true"></i>
+                            <div class="ctitle">
+                                3. Share & publish dashboards
+                            </div>
+                            <div class="cdesc">
+                                Publish a live dashboard to a whole team with
+                                one click. Everyone sees the same numbers.
+                            </div>
+                        </div>
+                        <div class="concept-card">
+                            <i class="ti ti-cpu cicon" aria-hidden="true"></i>
+                            <div class="ctitle">4. AI-powered insights</div>
+                            <div class="cdesc">
+                                OAC can automatically explain why a KPI changed,
+                                using machine learning — no data science degree
+                                needed.
+                            </div>
+                        </div>
+                        <div class="concept-card">
+                            <i
+                                class="ti ti-filter cicon"
+                                aria-hidden="true"
+                            ></i>
+                            <div class="ctitle">5. Filters & drill-down</div>
+                            <div class="cdesc">
+                                Click on a bar in a chart to immediately filter
+                                all other charts on the page. Interactive
+                                discovery without SQL.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="sec-label">
+                        Core OAC concepts with real-world analogies
+                    </div>
+                    <div class="concept-grid">
+                        <div class="concept-card">
+                            <div class="ctitle">Projects</div>
+                            <div class="cdesc">
+                                A project is your working file — like a Word
+                                document that contains all your charts and
+                                analyses. You create a new project for each
+                                analysis task.
+                            </div>
+                        </div>
+                        <div class="concept-card">
+                            <div class="ctitle">Data Sets</div>
+                            <div class="cdesc">
+                                A data set is the raw material you bring in —
+                                like the ingredients before cooking. Could be an
+                                uploaded Excel file or a live database
+                                connection.
+                            </div>
+                        </div>
+                        <div class="concept-card">
+                            <div class="ctitle">Visualisations</div>
+                            <div class="cdesc">
+                                Individual charts, tables, or maps — the
+                                "dishes" you cook from your data. Each one
+                                answers one question visually.
+                            </div>
+                        </div>
+                        <div class="concept-card">
+                            <div class="ctitle">Dashboards (Workbooks)</div>
+                            <div class="cdesc">
+                                A collection of visualisations on one screen —
+                                like a restaurant menu board. Shows many metrics
+                                at a glance.
+                            </div>
+                        </div>
+                        <div class="concept-card">
+                            <div class="ctitle">Data Flows</div>
+                            <div class="cdesc">
+                                Automated pipelines that transform and prepare
+                                data before analysis — like a prep chef in a
+                                kitchen doing the chopping before cooking
+                                starts.
+                            </div>
+                        </div>
+                        <div class="concept-card">
+                            <div class="ctitle">Semantic Models</div>
+                            <div class="cdesc">
+                                A "translation guide" that converts database
+                                column names into business language. So
+                                "HDT_EMP_ID_7" becomes "Employee ID" in every
+                                chart, automatically.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="sec-label">
+                        Your very first OAC login — what you'll see
+                    </div>
+                    <p class="prose">
+                        When you first log in to OAC, you'll land on the Home
+                        page. Here's what to expect step by step:
+                    </p>
+                    <div class="analogy-box">
+                        <div class="label">Step-by-step walkthrough</div>
+                        <p>
+                            <strong>1. Home screen:</strong> A grid of "cards"
+                            showing recent projects and dashboards, plus a top
+                            navigation bar with icons for Home, Catalog, Data,
+                            and Console.<br /><br />
+                            <strong>2. Create your first project:</strong> Click
+                            the blue "Create" button (top right). Select
+                            "Workbook." This opens a blank canvas.<br /><br />
+                            <strong>3. Add a data set:</strong> Click "Add Data"
+                            on the left panel. You can upload a CSV file or
+                            connect to a database. For practice, upload a sample
+                            CSV.<br /><br />
+                            <strong>4. Build a chart:</strong> In the data panel
+                            on the left, drag a field (e.g. "Sales") onto the
+                            canvas. OAC automatically picks a chart type. You
+                            can change it from the top toolbar.<br /><br />
+                            <strong>5. Save and share:</strong> Click the save
+                            icon, give your workbook a name. Click "Share" to
+                            get a link or export to PDF.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="sec-label">Free hands-on resources for OAC</div>
+                    <div class="resource-card">
+                        <span class="rtag rtag-free">Free Trial</span>
+                        <div class="rname">
+                            Oracle Cloud Free Tier — includes OAC trial
+                        </div>
+                        <div class="rdesc">
+                            Go to this URL and click the orange "Start for free"
+                            button. You'll create an Oracle account. The page
+                            has a white background with three columns explaining
+                            what's included free. OAC is listed as a 30-day free
+                            trial. You'll need an email and a credit card (not
+                            charged for the free tier services).
+                        </div>
+                        <a
+                            href="https://www.oracle.com/cloud/free/"
+                            target="_blank"
+                            >https://www.oracle.com/cloud/free/</a
+                        >
+                        <div class="rtime">
+                            <i
+                                class="ti ti-clock"
+                                aria-hidden="true"
+                                style="font-size: 13px"
+                            ></i>
+                            30 min to set up
+                        </div>
+                    </div>
+                    <div class="resource-card">
+                        <span class="rtag rtag-lab">LiveLabs</span>
+                        <div class="rname">
+                            Create Visualizations Using Oracle Analytics Cloud
+                        </div>
+                        <div class="rdesc">
+                            At the LiveLabs home page, search "Oracle Analytics
+                            Cloud Visualization." The workshop card shows a blue
+                            preview image of OAC's canvas, a "Start" button, and
+                            ~3-hour estimated time. This lab gives you a real
+                            OAC environment in-browser — no install needed.
+                        </div>
+                        <a
+                            href="https://apexapps.oracle.com/pls/apex/dbpm/r/livelabs/view-workshop?wid=3281"
+                            target="_blank"
+                            >https://apexapps.oracle.com/pls/apex/dbpm/r/livelabs/view-workshop?wid=3281</a
+                        >
+                        <div class="rtime">
+                            <i
+                                class="ti ti-clock"
+                                aria-hidden="true"
+                                style="font-size: 13px"
+                            ></i>
+                            3 hours
+                        </div>
+                    </div>
+                    <div class="resource-card">
+                        <span class="rtag rtag-video">YouTube</span>
+                        <div class="rname">
+                            "Oracle Analytics Cloud Tutorial for Beginners" —
+                            Oracle Learning
+                        </div>
+                        <div class="rdesc">
+                            Search on YouTube: "Oracle Analytics Cloud tutorial
+                            beginners Oracle Learning." The first official
+                            result has a thumbnail showing the OAC home screen
+                            with a play button. Channel name: "Oracle Learning."
+                            The video is ~45 minutes and walks through the
+                            entire UI from login to publishing a dashboard.
+                        </div>
+                        <a
+                            href="https://www.youtube.com/@OracleLearning"
+                            target="_blank"
+                            >https://www.youtube.com/@OracleLearning</a
+                        >
+                        <div class="rtime">
+                            <i
+                                class="ti ti-clock"
+                                aria-hidden="true"
+                                style="font-size: 13px"
+                            ></i>
+                            45 min
+                        </div>
+                    </div>
+                    <div class="resource-card">
+                        <span class="rtag rtag-docs">Official Docs</span>
+                        <div class="rname">
+                            Visualising Data and Building Reports in Oracle
+                            Analytics Cloud
+                        </div>
+                        <div class="rdesc">
+                            This Oracle documentation page has a white
+                            background with the Oracle logo top-left. The left
+                            panel shows chapters: "Create Workbooks," "Add
+                            Visualisations," "Configure Filters." The main
+                            content area begins with "About Visualisations."
+                            You're in the right place if you see these
+                            navigation items.
+                        </div>
+                        <a
+                            href="https://docs.oracle.com/en/cloud/paas/analytics-cloud/acubi/index.html"
+                            target="_blank"
+                            >https://docs.oracle.com/en/cloud/paas/analytics-cloud/acubi/index.html</a
+                        >
+                        <div class="rtime">
+                            <i
+                                class="ti ti-clock"
+                                aria-hidden="true"
+                                style="font-size: 13px"
+                            ></i>
+                            1 hour reference
+                        </div>
+                    </div>
+                </div>
+
+                <div class="anchor-box">
+                    <i class="ti ti-brain aicon" aria-hidden="true"></i>
+                    <div class="atxt">
+                        <strong>Memory anchor:</strong> "OAC is the canvas. You
+                        bring your data (ingredients), drag charts onto a screen
+                        (cook dishes), and publish dashboards (serve the meal) —
+                        no recipe needed."
+                    </div>
+                </div>
+                <div class="curiosity-box">
+                    <i class="ti ti-bulb cqicon" aria-hidden="true"></i>
+                    <div class="atxt">
+                        <strong>Curiosity question:</strong> OAC has a feature
+                        called "Explain" — you right-click any data point and
+                        OAC automatically writes an AI-generated explanation of
+                        why that number is unusual, using statistical analysis
+                        in the background. No data scientist required. What
+                        decisions at your internship company could this
+                        accelerate?
+                    </div>
+                </div>
+                <div class="sec-label" style="margin-bottom: 0.4rem">
+                    Revisit on:
+                </div>
+                <div class="revisit-row">
+                    <span class="revisit-chip">Day 1 (same day)</span>
+                    <span class="revisit-chip">Day 4</span>
+                    <span class="revisit-chip">Day 10</span>
+                    <span class="revisit-chip">Week 4</span>
+                    <span class="revisit-chip">Month 2</span>
+                </div>
+
+                <div class="quiz-section">
+                    <div class="qlabel">Active recall quiz</div>
+                    <div class="quiz-q">
+                        1. What is the difference between a Data Set and a
+                        Project in OAC?
+                    </div>
+                    <div class="quiz-q">
+                        2. What does a Semantic Model do, in plain English?
+                    </div>
+                    <div class="quiz-q">
+                        3. Name two situations where OAC is clearly better than
+                        Excel.
+                    </div>
+                    <div class="quiz-q">
+                        4. What is the first thing you should click when you
+                        want to build a new dashboard in OAC?
+                    </div>
+                    <div class="quiz-q">
+                        5. Why might a company choose OAC over Tableau?
+                    </div>
+                    <button class="reveal-btn" onclick="toggleAnswers('a1')">
+                        Show sample answers
+                    </button>
+                    <div id="a1" class="answer-box">
+                        <div class="answer-item">
+                            1. A Data Set is the raw data you bring in (like
+                            ingredients). A Project (Workbook) is your working
+                            file where you build charts using that data (like
+                            the recipe + finished dish).
+                        </div>
+                        <div class="answer-item">
+                            2. A Semantic Model translates technical database
+                            column names into human-readable business terms, so
+                            "COL_7742" becomes "Hire Date" in every chart
+                            automatically.
+                        </div>
+                        <div class="answer-item">
+                            3. When you have millions of rows (Excel would
+                            crash); when multiple people need to see live,
+                            auto-refreshing data at the same time.
+                        </div>
+                        <div class="answer-item">
+                            4. Click the blue "Create" button (top right of the
+                            Home page) and select "Workbook."
+                        </div>
+                        <div class="answer-item">
+                            5. If the company runs on Oracle Fusion ERP/HCM, OAC
+                            integrates natively with zero extra setup. Oracle
+                            support and licensing is also simpler in an
+                            all-Oracle environment.
+                        </div>
+                    </div>
+                </div>
+                <div class="teach-box">
+                    <div class="tlabel">Teach it back challenge</div>
+                    <div class="tbody">
+                        2-minute challenge: explain OAC to an imaginary new
+                        intern using the cooking analogy. Cover: what problem it
+                        solves, what a Data Set is, what a Dashboard is, and one
+                        thing it does better than Excel.
+                    </div>
+                </div>
+            </div>
+
+            <div id="m2" class="module-panel">
+                <div class="meta-row">
+                    <span class="meta-pill"
+                        ><i class="ti ti-clock" aria-hidden="true"></i> 5–6
+                        hours</span
+                    >
+                    <span class="meta-pill"
+                        ><i class="ti ti-check" aria-hidden="true"></i> Complete
+                        Module 1 first</span
+                    >
+                </div>
+
+                <div class="section">
+                    <div class="sec-label">
+                        What is FDI and what problem does it solve?
+                    </div>
+                    <p class="prose">
+                        OAC is a brilliant tool — but it starts completely
+                        empty. If you're a Finance Analyst at a large company
+                        using Oracle Fusion ERP, you'd need a team of data
+                        engineers spending 6–12 months building the data
+                        pipelines, data model, and 200+ dashboard templates
+                        before OAC shows anything useful. FDI solves this: it
+                        comes with everything pre-built for Oracle Fusion. Day
+                        1, you get 150+ dashboards, 2,000+ pre-built metrics,
+                        and connections already wired to your Fusion ERP.
+                    </p>
+                    <div class="analogy-box">
+                        <div class="label">Analogy</div>
+                        <p>
+                            OAC alone is like buying an empty restaurant space.
+                            FDI is like buying a McDonald's franchise — the
+                            kitchen, the menu, the uniforms, and the recipes are
+                            all included. You can customise, but the core is
+                            already built and proven.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="sec-label">
+                        How FDI relates to Oracle Fusion applications
+                    </div>
+                    <p class="prose">
+                        Oracle Fusion is a family of cloud applications: ERP
+                        (finance, accounting), HCM (HR, payroll), SCM (supply
+                        chain), and CX (customer experience). Each of these
+                        generates enormous amounts of data every day. FDI is
+                        specifically designed to understand the data structure
+                        of these Fusion apps — it knows that "WRK_ASGN_STTS_CD"
+                        in the HR database means "Employee Assignment Status."
+                        You don't have to figure that out yourself.
+                    </p>
+                </div>
+
+                <div class="section">
+                    <div class="sec-label">
+                        The architecture — each arrow in one sentence
+                    </div>
+                    <div class="eco-grid">
+                        <div class="eco-row">
+                            <div
+                                class="eco-box"
+                                style="background: #e6f1fb; color: #0c447c"
+                            >
+                                Oracle Fusion<br />ERP / HCM / SCM
+                            </div>
+                            <div class="eco-arrow">
+                                <i
+                                    class="ti ti-arrow-right"
+                                    aria-hidden="true"
+                                ></i>
+                            </div>
+                            <div class="eco-desc">
+                                <strong>Arrow 1:</strong> FDI's built-in
+                                pipelines automatically extract fresh data from
+                                Fusion apps every night (or in near real-time).
+                            </div>
+                        </div>
+                        <div class="eco-row">
+                            <div
+                                class="eco-box"
+                                style="background: #eeedfe; color: #3c3489"
+                            >
+                                FDI Augmentation<br />& Transformation
+                            </div>
+                            <div class="eco-arrow">
+                                <i
+                                    class="ti ti-arrow-right"
+                                    aria-hidden="true"
+                                ></i>
+                            </div>
+                            <div class="eco-desc">
+                                <strong>Arrow 2:</strong> FDI cleans, joins, and
+                                enriches the data, applying 2,000+ pre-defined
+                                business metrics, then loads it into the
+                                warehouse.
+                            </div>
+                        </div>
+                        <div class="eco-row">
+                            <div
+                                class="eco-box"
+                                style="background: #e1f5ee; color: #085041"
+                            >
+                                Autonomous Data<br />Warehouse (ADW)
+                            </div>
+                            <div class="eco-arrow">
+                                <i
+                                    class="ti ti-arrow-right"
+                                    aria-hidden="true"
+                                ></i>
+                            </div>
+                            <div class="eco-desc">
+                                <strong>Arrow 3:</strong> The structured,
+                                analytics-ready data sits in Oracle's cloud
+                                database — fast, secure, and accessible only
+                                through authorised tools.
+                            </div>
+                        </div>
+                        <div class="eco-row">
+                            <div
+                                class="eco-box"
+                                style="background: #faece7; color: #712b13"
+                            >
+                                OAC + FDI<br />Pre-built Dashboards
+                            </div>
+                            <div
+                                class="eco-arrow"
+                                style="visibility: hidden"
+                            ></div>
+                            <div class="eco-desc">
+                                <strong>End result:</strong> Business users open
+                                their browser and see pre-built, real-time
+                                dashboards — finance teams see
+                                payables/receivables, HR sees headcount and
+                                attrition, all without IT help.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="sec-label">Key FDI concepts you must know</div>
+                    <div class="concept-grid">
+                        <div class="concept-card">
+                            <div class="ctitle">Subject Areas</div>
+                            <div class="cdesc">
+                                Pre-organised buckets of related data fields for
+                                a specific business domain. "Workforce
+                                Management Subject Area" has every HR field.
+                                Like a chapter in a textbook — everything you
+                                need for one topic in one place.
+                            </div>
+                        </div>
+                        <div class="concept-card">
+                            <div class="ctitle">Decks</div>
+                            <div class="cdesc">
+                                A collection of KPI Cards on one screen — like a
+                                cockpit with gauges. A Finance Deck might show
+                                Revenue, Expenses, and Profit side-by-side.
+                                Executives love Decks for their daily check-in.
+                            </div>
+                        </div>
+                        <div class="concept-card">
+                            <div class="ctitle">KPI Cards</div>
+                            <div class="cdesc">
+                                Individual "tiles" showing one key metric with
+                                its trend (up/down arrows). Like a speedometer —
+                                one number, one direction, instantly understood.
+                                Clickable to drill into details.
+                            </div>
+                        </div>
+                        <div class="concept-card">
+                            <div class="ctitle">Data Augmentation</div>
+                            <div class="cdesc">
+                                The ability to bring in additional data from
+                                outside Oracle Fusion (e.g. an Excel file with
+                                budget targets) and blend it with pre-built FDI
+                                data. Like adding your own spice to an existing
+                                recipe.
+                            </div>
+                        </div>
+                        <div class="concept-card">
+                            <div class="ctitle">Customisation</div>
+                            <div class="cdesc">
+                                FDI lets you add your own custom metrics, rename
+                                fields, create new dashboard views, and add
+                                company-specific data — while keeping all the
+                                pre-built content intact.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="sec-label">
+                        What does an intern actually DO with FDI day-to-day?
+                    </div>
+                    <div class="concept-grid">
+                        <div class="concept-card">
+                            <div class="ctitle">
+                                Example 1 — Report requests
+                            </div>
+                            <div class="cdesc">
+                                A manager asks: "Can you pull last quarter's
+                                headcount by department?" You open the pre-built
+                                HR dashboard in FDI, apply a date filter, and
+                                export the table to Excel in 5 minutes.
+                            </div>
+                        </div>
+                        <div class="concept-card">
+                            <div class="ctitle">Example 2 — Dashboard prep</div>
+                            <div class="cdesc">
+                                Before a leadership meeting, you're asked to
+                                update a KPI Deck with the latest figures. You
+                                open FDI, refresh the data pipeline, and confirm
+                                the numbers look correct before the meeting.
+                            </div>
+                        </div>
+                        <div class="concept-card">
+                            <div class="ctitle">
+                                Example 3 — Data exploration
+                            </div>
+                            <div class="cdesc">
+                                You're asked to investigate why overtime costs
+                                spiked last month. You open FDI's Payroll
+                                Subject Area, add an overtime filter, and use
+                                drill-down to find which department drove the
+                                spike.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="sec-label">
+                        Common beginner confusions about FDI
+                    </div>
+                    <div class="warn-fact">
+                        <p>
+                            <strong>Confusion 1:</strong> "FDI and OAC are
+                            separate products." — Wrong. FDI is deployed on top
+                            of OAC. When you use FDI, you ARE using OAC under
+                            the hood. FDI just adds the Fusion-specific
+                            pre-built layer on top.
+                        </p>
+                    </div>
+                    <div class="warn-fact">
+                        <p>
+                            <strong>Confusion 2:</strong> "Pre-built means I
+                            can't change anything." — Wrong. Pre-built means the
+                            starting point is done for you. You can customise
+                            everything: add new fields, change visualisations,
+                            blend in new data sources.
+                        </p>
+                    </div>
+                    <div class="warn-fact">
+                        <p>
+                            <strong>Confusion 3:</strong> "FDI only works with
+                            Finance data." — Wrong. FDI has pre-built modules
+                            for HCM (HR), SCM (Supply Chain), ERP (Finance), and
+                            CX (Customer Experience). Each domain has its own
+                            pre-built dashboards.
+                        </p>
+                    </div>
+                    <div class="warn-fact">
+                        <p>
+                            <strong>Confusion 4:</strong> "FDI is the same as
+                            FAW." — Partially right. Oracle Fusion Analytics
+                            Warehouse (FAW) is the old name. It was rebranded to
+                            Fusion Data Intelligence (FDI). Same product, newer
+                            name.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="sec-label">Free resources for FDI</div>
+                    <div class="resource-card">
+                        <span class="rtag rtag-free">Free Course</span>
+                        <div class="rname">
+                            Oracle Fusion Analytics — Oracle University Learning
+                            Path
+                        </div>
+                        <div class="rdesc">
+                            Navigate to education.oracle.com and search "Fusion
+                            Analytics." You'll see a course card with an orange
+                            Oracle badge, the title, and a "Free" or
+                            "Subscription" indicator. Look for the "Fusion
+                            Analytics Warehouse Foundations" learning path — it
+                            shows 4–6 modules listed below the course title.
+                        </div>
+                        <a
+                            href="https://education.oracle.com/oracle-fusion-analytics/pFamily_678"
+                            target="_blank"
+                            >https://education.oracle.com/oracle-fusion-analytics/pFamily_678</a
+                        >
+                        <div class="rtime">
+                            <i
+                                class="ti ti-clock"
+                                aria-hidden="true"
+                                style="font-size: 13px"
+                            ></i>
+                            3 hours
+                        </div>
+                    </div>
+                    <div class="resource-card">
+                        <span class="rtag rtag-lab">LiveLabs</span>
+                        <div class="rname">
+                            Get Started with Oracle Fusion Analytics Warehouse
+                        </div>
+                        <div class="rdesc">
+                            At the LiveLabs home page, type "Fusion Analytics"
+                            in the search bar. The workshop card has a
+                            purple-gradient thumbnail, shows "Oracle Fusion
+                            Analytics Warehouse" as the title, and lists
+                            prerequisites. Click the card to see the full lab
+                            list. The green "Start" button launches a free cloud
+                            environment.
+                        </div>
+                        <a
+                            href="https://apexapps.oracle.com/pls/apex/dbpm/r/livelabs/view-workshop?wid=3298"
+                            target="_blank"
+                            >https://apexapps.oracle.com/pls/apex/dbpm/r/livelabs/view-workshop?wid=3298</a
+                        >
+                        <div class="rtime">
+                            <i
+                                class="ti ti-clock"
+                                aria-hidden="true"
+                                style="font-size: 13px"
+                            ></i>
+                            4 hours
+                        </div>
+                    </div>
+                    <div class="resource-card">
+                        <span class="rtag rtag-video">YouTube</span>
+                        <div class="rname">
+                            "Oracle Fusion Analytics Warehouse — Overview and
+                            Demo" — Oracle Analytics
+                        </div>
+                        <div class="rdesc">
+                            Search YouTube: "Oracle Fusion Analytics Warehouse
+                            overview demo." Look for results from the Oracle
+                            Analytics channel (verified blue tick). The
+                            thumbnail shows KPI cards and dashboards. The 20–30
+                            min video walks through the FDI home screen,
+                            pre-built decks, and a live data exploration demo.
+                        </div>
+                        <a
+                            href="https://www.youtube.com/@OracleAnalytics"
+                            target="_blank"
+                            >https://www.youtube.com/@OracleAnalytics</a
+                        >
+                        <div class="rtime">
+                            <i
+                                class="ti ti-clock"
+                                aria-hidden="true"
+                                style="font-size: 13px"
+                            ></i>
+                            30 min
+                        </div>
+                    </div>
+                    <div class="resource-card">
+                        <span class="rtag rtag-docs">Official Docs</span>
+                        <div class="rname">
+                            Oracle Fusion Analytics Warehouse — Getting Started
+                        </div>
+                        <div class="rdesc">
+                            The page has Oracle's standard white/grey docs
+                            layout. The left sidebar shows "Introduction,"
+                            "Architecture," "Pre-Built Analytics," and "Key
+                            Concepts." The main content area begins with a
+                            diagram showing the Fusion → FDI → ADW → OAC flow.
+                            You're in the right place if you see that flow
+                            diagram above the fold.
+                        </div>
+                        <a
+                            href="https://docs.oracle.com/en/cloud/saas/analytics/index.html"
+                            target="_blank"
+                            >https://docs.oracle.com/en/cloud/saas/analytics/index.html</a
+                        >
+                        <div class="rtime">
+                            <i
+                                class="ti ti-clock"
+                                aria-hidden="true"
+                                style="font-size: 13px"
+                            ></i>
+                            1 hour reference
+                        </div>
+                    </div>
+                </div>
+
+                <div class="anchor-box">
+                    <i class="ti ti-brain aicon" aria-hidden="true"></i>
+                    <div class="atxt">
+                        <strong>Memory anchor:</strong> "FDI is the McDonald's
+                        franchise for Oracle analytics — the kitchen, menu, and
+                        recipes (pre-built pipelines, data models, dashboards)
+                        are all included on Day 1. OAC is just the empty
+                        restaurant space."
+                    </div>
+                </div>
+                <div class="curiosity-box">
+                    <i class="ti ti-bulb cqicon" aria-hidden="true"></i>
+                    <div class="atxt">
+                        <strong>Curiosity question:</strong> FDI comes with over
+                        2,000 pre-built metrics. A human data team might take 2
+                        years to build the same thing from scratch. Which of
+                        those 2,000 metrics would matter most to a CFO — and
+                        could you find the answer by exploring FDI's
+                        documentation?
+                    </div>
+                </div>
+                <div class="sec-label" style="margin-bottom: 0.4rem">
+                    Revisit on:
+                </div>
+                <div class="revisit-row">
+                    <span class="revisit-chip">Day 1</span>
+                    <span class="revisit-chip">Day 4</span>
+                    <span class="revisit-chip">Day 10</span>
+                    <span class="revisit-chip">Week 4</span>
+                    <span class="revisit-chip">Month 3</span>
+                </div>
+                <div class="quiz-section">
+                    <div class="qlabel">Active recall quiz</div>
+                    <div class="quiz-q">
+                        1. What is the key difference between FDI and OAC alone?
+                    </div>
+                    <div class="quiz-q">
+                        2. What are the four Oracle Fusion application domains
+                        that FDI supports?
+                    </div>
+                    <div class="quiz-q">
+                        3. What is a KPI Card? Describe it using a physical
+                        world analogy.
+                    </div>
+                    <div class="quiz-q">
+                        4. What does "Data Augmentation" in FDI mean?
+                    </div>
+                    <div class="quiz-q">
+                        5. FDI was previously known by what name?
+                    </div>
+                    <button class="reveal-btn" onclick="toggleAnswers('a2')">
+                        Show sample answers
+                    </button>
+                    <div id="a2" class="answer-box">
+                        <div class="answer-item">
+                            1. OAC is empty and requires months of setup. FDI
+                            comes with 150+ pre-built dashboards, 2,000+
+                            metrics, and pipelines already connected to Oracle
+                            Fusion — ready to use on Day 1.
+                        </div>
+                        <div class="answer-item">
+                            2. ERP (Finance/Accounting), HCM (HR/Payroll), SCM
+                            (Supply Chain), CX (Customer Experience).
+                        </div>
+                        <div class="answer-item">
+                            3. A KPI Card is like a speedometer — one number,
+                            one trend arrow, instantly understood. You see the
+                            metric value, whether it's up or down vs. target,
+                            and can click to drill into detail.
+                        </div>
+                        <div class="answer-item">
+                            4. Data Augmentation means adding external data
+                            (like an Excel file with budget targets) into FDI
+                            alongside the pre-built Oracle Fusion data, so your
+                            dashboards show both together.
+                        </div>
+                        <div class="answer-item">
+                            5. Oracle Fusion Analytics Warehouse (FAW).
+                        </div>
+                    </div>
+                </div>
+                <div class="teach-box">
+                    <div class="tlabel">Teach it back challenge</div>
+                    <div class="tbody">
+                        2-minute challenge: explain to an imaginary Finance
+                        colleague why their company should buy FDI instead of
+                        just using OAC alone. Use the McDonald's franchise
+                        analogy and name three specific things FDI includes that
+                        OAC doesn't.
+                    </div>
+                </div>
+            </div>
+
+            <div id="m3" class="module-panel">
+                <div class="meta-row">
+                    <span class="meta-pill"
+                        ><i class="ti ti-clock" aria-hidden="true"></i> 4–5
+                        hours</span
+                    >
+                    <span class="meta-pill"
+                        ><i class="ti ti-check" aria-hidden="true"></i> Complete
+                        Modules 1 & 2 first</span
+                    >
+                </div>
+
+                <div class="section">
+                    <div class="sec-label">
+                        FDI is built on top of OAC — what does that mean?
+                    </div>
+                    <p class="prose">
+                        When Oracle engineers built FDI, they didn't start from
+                        scratch. They took OAC as the foundation and built FDI
+                        as an extra layer sitting on top. This means every FDI
+                        installation includes a full OAC instance underneath.
+                        When you look at an FDI dashboard, you are literally
+                        looking at OAC rendering the charts — FDI just added the
+                        pre-built data pipelines, the Fusion-specific semantic
+                        model, and the pre-built dashboards on top.
+                    </p>
+                    <div class="analogy-box">
+                        <div class="label">Analogy</div>
+                        <p>
+                            Think of an iPhone and iOS. OAC is iOS — the
+                            operating system that makes everything run. FDI is a
+                            pre-installed suite of professional apps (like a
+                            fully configured business iPhone handed to a new
+                            employee). All the apps run on iOS, but someone
+                            already set them up for you.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="sec-label">
+                        What you can do in FDI but not plain OAC
+                    </div>
+                    <div class="concept-grid">
+                        <div class="concept-card">
+                            <div class="ctitle">FDI only</div>
+                            <div class="cdesc">
+                                Pre-built Oracle Fusion pipelines. 150+
+                                ready-made dashboards for Finance/HR/SCM. 2,000+
+                                pre-calculated business metrics. Decks and KPI
+                                Cards UI. One-click activation of new Fusion
+                                module analytics.
+                            </div>
+                        </div>
+                        <div class="concept-card">
+                            <div class="ctitle">OAC only (plain)</div>
+                            <div class="cdesc">
+                                Connect to non-Oracle data sources (Google
+                                Sheets, Salesforce, CSV files). Full freedom to
+                                design custom semantic models from scratch.
+                                Advanced ML/AI augmented analytics features. Use
+                                with non-Fusion data environments.
+                            </div>
+                        </div>
+                        <div class="concept-card">
+                            <div class="ctitle">Both (FDI includes OAC)</div>
+                            <div class="cdesc">
+                                Drag-and-drop visualisation canvas. Data Flows
+                                for transformation. Sharing and publishing
+                                dashboards. Filters, prompts, drill-downs.
+                                Embedded analytics.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="sec-label">
+                        End-to-end real scenario: "Why did operating costs
+                        increase?"
+                    </div>
+                    <div class="analogy-box">
+                        <div class="label">Finance team walkthrough</div>
+                        <p>
+                            <strong>Step 1 — Morning check (FDI Deck):</strong>
+                            The Finance VP opens her FDI homepage. Her KPI Deck
+                            shows "Operating Expenses" is 12% above target this
+                            quarter — the card is red with an upward arrow.<br /><br />
+                            <strong
+                                >Step 2 — Drill down (FDI pre-built
+                                dashboard):</strong
+                            >
+                            She clicks the KPI Card. FDI opens the "Expenses by
+                            Category" pre-built dashboard. She can see that the
+                            spike is in "Professional Services" and "Travel."<br /><br />
+                            <strong
+                                >Step 3 — Deeper analysis (OAC canvas):</strong
+                            >
+                            She clicks "Open in New Workbook" — this takes her
+                            into OAC's full canvas. She drags in additional
+                            fields: department, cost centre, project code. She
+                            builds a custom scatter chart showing which
+                            departments drove the increase.<br /><br />
+                            <strong>Step 4 — AI insight (OAC Explain):</strong>
+                            She right-clicks the spike in September. OAC's
+                            "Explain" feature automatically highlights that 3
+                            departments in APAC had unusually high consulting
+                            spend tied to a single project ID.<br /><br />
+                            <strong>Step 5 — Share (OAC):</strong> She exports
+                            the workbook as a PDF and shares a live dashboard
+                            link with the CFO — who sees the same live numbers
+                            on their phone.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="sec-label">
+                        Beginner mini-project: experience both tools together
+                    </div>
+                    <div class="concept-card" style="margin-bottom: 0.75rem">
+                        <div class="ctitle">
+                            Mini-project: "My Department Dashboard"
+                        </div>
+                        <div class="cdesc" style="line-height: 1.7">
+                            <strong>Goal:</strong> Build a 2-page dashboard
+                            using sample data that mimics what an HR team would
+                            use.<br /><br />
+                            <strong>Step 1:</strong> Download Oracle's free
+                            sample HR dataset from the OAC documentation page
+                            (search "OAC sample data" in docs.oracle.com).<br /><br />
+                            <strong>Step 2:</strong> Upload it as a Data Set in
+                            OAC (free trial environment).<br /><br />
+                            <strong>Step 3:</strong> Build a "Headcount by
+                            Department" bar chart and a "Monthly Hire Trend"
+                            line chart on Page 1.<br /><br />
+                            <strong>Step 4:</strong> Add a "KPI tile" showing
+                            total headcount and attrition rate on Page 2.<br /><br />
+                            <strong>Step 5:</strong> Add a Department filter
+                            that drives all charts simultaneously.<br /><br />
+                            <strong>FDI connection:</strong> After completing
+                            this, watch the FDI LiveLab to see how the same
+                            charts come pre-built in FDI's HCM module — compare
+                            your manual build to the pre-built version.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="sec-label">Free resources for Module 3</div>
+                    <div class="resource-card">
+                        <span class="rtag rtag-lab">LiveLabs</span>
+                        <div class="rname">
+                            Explore Oracle Fusion Analytics (HCM)
+                        </div>
+                        <div class="rdesc">
+                            On the LiveLabs home page, search "Fusion Analytics
+                            HCM." The workshop card shows HR-themed dashboard
+                            screenshots. This lab lets you explore the pre-built
+                            HCM dashboards end-to-end, from data pipeline to
+                            finished KPI deck. Compare what you see here to what
+                            you built manually in OAC.
+                        </div>
+                        <a
+                            href="https://apexapps.oracle.com/pls/apex/dbpm/r/livelabs/view-workshop?wid=3427"
+                            target="_blank"
+                            >https://apexapps.oracle.com/pls/apex/dbpm/r/livelabs/view-workshop?wid=3427</a
+                        >
+                        <div class="rtime">
+                            <i
+                                class="ti ti-clock"
+                                aria-hidden="true"
+                                style="font-size: 13px"
+                            ></i>
+                            3 hours
+                        </div>
+                    </div>
+                    <div class="resource-card">
+                        <span class="rtag rtag-video">YouTube</span>
+                        <div class="rname">
+                            "Oracle Fusion Analytics Warehouse — Finance Deep
+                            Dive"
+                        </div>
+                        <div class="rdesc">
+                            Search YouTube: "Oracle Fusion Analytics Finance
+                            deep dive." Look for Oracle's official channel. The
+                            video thumbnail shows an income statement dashboard.
+                            This ~25-min video specifically walks through the
+                            Finance pre-built dashboards and shows the
+                            drill-down from KPI card to root cause analysis.
+                        </div>
+                        <a
+                            href="https://www.youtube.com/@OracleAnalytics"
+                            target="_blank"
+                            >https://www.youtube.com/@OracleAnalytics</a
+                        >
+                        <div class="rtime">
+                            <i
+                                class="ti ti-clock"
+                                aria-hidden="true"
+                                style="font-size: 13px"
+                            ></i>
+                            25 min
+                        </div>
+                    </div>
+                    <div class="resource-card">
+                        <span class="rtag rtag-docs">Official Docs</span>
+                        <div class="rname">
+                            Oracle Fusion Analytics Warehouse — Pre-Built
+                            Analytics Overview
+                        </div>
+                        <div class="rdesc">
+                            In Oracle's docs portal, search "FAW pre-built
+                            analytics." The page opens with a table of contents
+                            showing ERP Analytics, HCM Analytics, SCM Analytics,
+                            and CX Analytics as sections. Each section lists
+                            specific dashboard names. This is the reference for
+                            understanding what comes pre-built.
+                        </div>
+                        <a
+                            href="https://docs.oracle.com/en/cloud/saas/analytics/fawag/index.html"
+                            target="_blank"
+                            >https://docs.oracle.com/en/cloud/saas/analytics/fawag/index.html</a
+                        >
+                        <div class="rtime">
+                            <i
+                                class="ti ti-clock"
+                                aria-hidden="true"
+                                style="font-size: 13px"
+                            ></i>
+                            1 hour reference
+                        </div>
+                    </div>
+                </div>
+
+                <div class="anchor-box">
+                    <i class="ti ti-brain aicon" aria-hidden="true"></i>
+                    <div class="atxt">
+                        <strong>Memory anchor:</strong> "FDI is iOS +
+                        pre-installed business apps. OAC is iOS alone. Every FDI
+                        user has OAC. Not every OAC user has FDI. The CFO clicks
+                        a pre-built FDI KPI, drills into OAC to customise, and
+                        emails the answer — all in one tool."
+                    </div>
+                </div>
+                <div class="curiosity-box">
+                    <i class="ti ti-bulb cqicon" aria-hidden="true"></i>
+                    <div class="atxt">
+                        <strong>Curiosity question:</strong> Oracle says FDI can
+                        reduce the time-to-insight for a new analytics
+                        deployment from 12–18 months to 2–4 weeks. If that's
+                        true for your internship company, what would your team
+                        do with the extra 11 months?
+                    </div>
+                </div>
+                <div class="sec-label" style="margin-bottom: 0.4rem">
+                    Revisit on:
+                </div>
+                <div class="revisit-row">
+                    <span class="revisit-chip">Day 2</span>
+                    <span class="revisit-chip">Day 7</span>
+                    <span class="revisit-chip">Week 2</span>
+                    <span class="revisit-chip">Month 1</span>
+                    <span class="revisit-chip">Month 3</span>
+                </div>
+                <div class="quiz-section">
+                    <div class="qlabel">Active recall quiz</div>
+                    <div class="quiz-q">
+                        1. Is FDI a completely separate product from OAC, or are
+                        they related? Explain.
+                    </div>
+                    <div class="quiz-q">
+                        2. Name two things you can do in FDI that you cannot do
+                        in plain OAC.
+                    </div>
+                    <div class="quiz-q">
+                        3. Name two things you can do in plain OAC that FDI is
+                        not specifically designed for.
+                    </div>
+                    <div class="quiz-q">
+                        4. In the Finance scenario, what did the VP click first
+                        — and what happened when she clicked it?
+                    </div>
+                    <div class="quiz-q">
+                        5. What is OAC's "Explain" feature and when would you
+                        use it?
+                    </div>
+                    <button class="reveal-btn" onclick="toggleAnswers('a3')">
+                        Show sample answers
+                    </button>
+                    <div id="a3" class="answer-box">
+                        <div class="answer-item">
+                            1. They're related — FDI is built on top of OAC. FDI
+                            includes a full OAC instance plus the
+                            Fusion-specific pre-built layer. Using FDI means
+                            you're using OAC under the hood.
+                        </div>
+                        <div class="answer-item">
+                            2. Pre-built Fusion pipelines and 150+ dashboards;
+                            KPI Cards and Decks UI designed specifically for
+                            executive check-ins.
+                        </div>
+                        <div class="answer-item">
+                            3. Connect to non-Oracle data sources like Google
+                            Sheets or Salesforce; design a custom semantic model
+                            from scratch for a non-Fusion data environment.
+                        </div>
+                        <div class="answer-item">
+                            4. She clicked the red KPI Card on her Deck. It
+                            opened the pre-built "Expenses by Category"
+                            dashboard, immediately showing which expense
+                            categories were above target.
+                        </div>
+                        <div class="answer-item">
+                            5. "Explain" is an AI feature — right-click any data
+                            point and OAC automatically generates a statistical
+                            explanation of why that number is unusual. Use it
+                            when you spot an anomaly and want a starting point
+                            for root-cause analysis.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="m4" class="module-panel">
+                <div class="meta-row">
+                    <span class="meta-pill"
+                        ><i class="ti ti-clock" aria-hidden="true"></i> 4–5
+                        hours + ongoing practice</span
+                    >
+                    <span class="meta-pill"
+                        ><i class="ti ti-tool" aria-hidden="true"></i> Practical
+                        skills</span
+                    >
+                </div>
+
+                <div class="section">
+                    <div class="sec-label">
+                        Basic data literacy — the concepts that matter most
+                    </div>
+                    <div class="concept-grid">
+                        <div class="concept-card">
+                            <div class="ctitle">Reading a chart</div>
+                            <div class="cdesc">
+                                Always check: What is on the X axis? What is on
+                                the Y axis? What is the time period? What are
+                                the units? Before drawing any conclusions,
+                                answer these four questions.
+                            </div>
+                        </div>
+                        <div class="concept-card">
+                            <div class="ctitle">Understanding KPIs</div>
+                            <div class="cdesc">
+                                A KPI is only useful when compared to something:
+                                a target, last year's figure, or an industry
+                                benchmark. A number alone means nothing —
+                                "revenue is $5M" means nothing without "versus
+                                target of $4.5M."
+                            </div>
+                        </div>
+                        <div class="concept-card">
+                            <div class="ctitle">What is a metric?</div>
+                            <div class="cdesc">
+                                A metric is any number you can measure.
+                                "Headcount" is a metric. A KPI is a metric that
+                                someone has decided is strategically important.
+                                All KPIs are metrics; not all metrics are KPIs.
+                            </div>
+                        </div>
+                        <div class="concept-card">
+                            <div class="ctitle">Correlation ≠ causation</div>
+                            <div class="cdesc">
+                                Two numbers moving together doesn't mean one
+                                causes the other. Ice cream sales and drowning
+                                rates both rise in summer — the cause is hot
+                                weather, not each other. Always ask "what else
+                                could explain this?"
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="sec-label">
+                        OAC navigation basics — where things live
+                    </div>
+                    <div class="analogy-box">
+                        <div class="label">UI map</div>
+                        <p>
+                            <strong>Top navigation bar:</strong> House icon =
+                            Home (recent items). Compass = Catalog (saved
+                            workbooks). Database cylinder = Data (datasets and
+                            connections). Gear = Console (admin settings — don't
+                            touch until you understand it).<br /><br />
+                            <strong>Home page:</strong> "Recent" tab shows your
+                            last opened workbooks. "Favorites" tab shows
+                            bookmarked items. Large blue "Create" button (top
+                            right) is your starting point for new work.<br /><br />
+                            <strong>Inside a workbook:</strong> Left panel =
+                            data fields you can drag. Centre = canvas where
+                            charts appear. Right panel = properties for the
+                            selected chart (change chart type, colours, axis
+                            settings here). Top bar = save, share, filter, and
+                            undo buttons.<br /><br />
+                            <strong>Catalog:</strong> Organised like a file
+                            system — folders and workbooks. Your company will
+                            likely have shared folders for Finance, HR, etc.
+                            Never delete from a shared folder without checking
+                            with your manager.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="sec-label">
+                        Exploring a pre-built FDI dashboard without breaking
+                        anything
+                    </div>
+                    <div class="concept-grid">
+                        <div class="concept-card">
+                            <div class="ctitle">
+                                Rule 1: Explore, don't edit
+                            </div>
+                            <div class="cdesc">
+                                Pre-built FDI dashboards are shared with your
+                                whole company. Use View mode only. If you want
+                                to customise, always click "Save As" to create
+                                your own copy first.
+                            </div>
+                        </div>
+                        <div class="concept-card">
+                            <div class="ctitle">Rule 2: Filters are safe</div>
+                            <div class="cdesc">
+                                Adding or changing a filter in View mode only
+                                affects what YOU see, temporarily. It does not
+                                save or affect what other users see. Filters are
+                                your safest exploration tool.
+                            </div>
+                        </div>
+                        <div class="concept-card">
+                            <div class="ctitle">Rule 3: Drill-down is safe</div>
+                            <div class="cdesc">
+                                Clicking on a chart element to drill into detail
+                                doesn't change anything. Use the breadcrumb
+                                trail at the top to navigate back up.
+                            </div>
+                        </div>
+                        <div class="concept-card">
+                            <div class="ctitle">Rule 4: When in doubt, ask</div>
+                            <div class="cdesc">
+                                If you're unsure whether an action will affect
+                                shared content, ask a senior colleague before
+                                clicking. "Will this change affect everyone?" is
+                                always a valid question.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="sec-label">
+                        Introduction to filters and prompts in OAC
+                    </div>
+                    <p class="prose">
+                        Filters are the most important interactive feature for
+                        day-to-day use. They let you narrow down what data the
+                        charts show, without changing the underlying data.
+                    </p>
+                    <div class="concept-grid">
+                        <div class="concept-card">
+                            <div class="ctitle">Dashboard Filters</div>
+                            <div class="cdesc">
+                                Dropdowns at the top of a dashboard. Selecting
+                                "Q1 2024" in the Date filter immediately updates
+                                ALL charts on the page to show only Q1 2024
+                                data.
+                            </div>
+                        </div>
+                        <div class="concept-card">
+                            <div class="ctitle">Canvas Filters</div>
+                            <div class="cdesc">
+                                Filters you add to a specific workbook canvas
+                                while building. Only affect charts on that
+                                canvas. Found in the "Filter Bar" below the
+                                toolbar.
+                            </div>
+                        </div>
+                        <div class="concept-card">
+                            <div class="ctitle">Data Filters</div>
+                            <div class="cdesc">
+                                Filters applied at the data set level — only
+                                certain rows are ever loaded into your analysis.
+                                Useful for large datasets where you only care
+                                about one region or department.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="sec-label">
+                        How to ask for help without looking lost
+                    </div>
+                    <div class="concept-grid">
+                        <div class="concept-card">
+                            <div class="ctitle">Specific questions win</div>
+                            <div class="cdesc">
+                                Instead of "I don't understand this dashboard,"
+                                say: "I'm trying to filter this chart by
+                                department — I found the filter bar but I'm not
+                                sure which field to use. Can you point me to the
+                                right one?"
+                            </div>
+                        </div>
+                        <div class="concept-card">
+                            <div class="ctitle">Show what you tried</div>
+                            <div class="cdesc">
+                                Before asking, try one or two things yourself.
+                                Then say "I tried X and got Y, but I was
+                                expecting Z — am I missing something?" This
+                                shows initiative and makes it much easier for a
+                                colleague to help.
+                            </div>
+                        </div>
+                        <div class="concept-card">
+                            <div class="ctitle">Use Oracle docs first</div>
+                            <div class="cdesc">
+                                For technical questions, Oracle's documentation
+                                is excellent. Search "OAC + your question" in
+                                Google — the docs.oracle.com result usually has
+                                the exact answer. Bring that link to the
+                                conversation.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="sec-label">Free resources for Module 4</div>
+                    <div class="resource-card">
+                        <span class="rtag rtag-lab">LiveLabs</span>
+                        <div class="rname">
+                            Augment and Customise Oracle Analytics Cloud
+                            Workbooks
+                        </div>
+                        <div class="rdesc">
+                            At the LiveLabs home page, search "OAC Workbooks."
+                            The workshop card shows a canvas screenshot with
+                            multiple chart types visible. This lab walks through
+                            every interactive feature: filters, drill-down,
+                            chart configuration, and sharing. It gives you a
+                            live OAC environment to practise in.
+                        </div>
+                        <a
+                            href="https://apexapps.oracle.com/pls/apex/dbpm/r/livelabs/view-workshop?wid=3282"
+                            target="_blank"
+                            >https://apexapps.oracle.com/pls/apex/dbpm/r/livelabs/view-workshop?wid=3282</a
+                        >
+                        <div class="rtime">
+                            <i
+                                class="ti ti-clock"
+                                aria-hidden="true"
+                                style="font-size: 13px"
+                            ></i>
+                            2.5 hours
+                        </div>
+                    </div>
+                    <div class="resource-card">
+                        <span class="rtag rtag-video">YouTube</span>
+                        <div class="rname">
+                            "Data Literacy Fundamentals" — Tableau (free,
+                            tool-agnostic concepts)
+                        </div>
+                        <div class="rdesc">
+                            Search YouTube: "data literacy fundamentals
+                            Tableau." The Tableau Official channel has a free
+                            playlist called "Data Literacy" with 6 short videos
+                            (5–10 min each). Though branded Tableau, all the
+                            concepts (reading charts, KPIs, metrics) apply
+                            directly to OAC and FDI.
+                        </div>
+                        <a
+                            href="https://www.youtube.com/@tableau"
+                            target="_blank"
+                            >https://www.youtube.com/@tableau</a
+                        >
+                        <div class="rtime">
+                            <i
+                                class="ti ti-clock"
+                                aria-hidden="true"
+                                style="font-size: 13px"
+                            ></i>
+                            1 hour
+                        </div>
+                    </div>
+                    <div class="resource-card">
+                        <span class="rtag rtag-docs">Official Docs</span>
+                        <div class="rname">
+                            OAC — Exploring and Interacting with Dashboards
+                        </div>
+                        <div class="rdesc">
+                            In Oracle's OAC documentation, navigate to "Using
+                            Oracle Analytics Cloud" → "Explore Data." The page
+                            opens with a white background, left-side navigation
+                            tree, and a section titled "Interact with Dashboards
+                            and Reports." It shows screenshots of the filter bar
+                            and drill-down interaction.
+                        </div>
+                        <a
+                            href="https://docs.oracle.com/en/cloud/paas/analytics-cloud/acubi/interact-data-visualizations.html"
+                            target="_blank"
+                            >https://docs.oracle.com/en/cloud/paas/analytics-cloud/acubi/interact-data-visualizations.html</a
+                        >
+                        <div class="rtime">
+                            <i
+                                class="ti ti-clock"
+                                aria-hidden="true"
+                                style="font-size: 13px"
+                            ></i>
+                            45 min
+                        </div>
+                    </div>
+                </div>
+
+                <div class="anchor-box">
+                    <i class="ti ti-brain aicon" aria-hidden="true"></i>
+                    <div class="atxt">
+                        <strong>Memory anchor:</strong> "Every chart has a story
+                        — but you must check what's on each axis, what the time
+                        period is, and what it's being compared against before
+                        reading the story. Numbers without context are noise."
+                    </div>
+                </div>
+                <div class="curiosity-box">
+                    <i class="ti ti-bulb cqicon" aria-hidden="true"></i>
+                    <div class="atxt">
+                        <strong>Curiosity question:</strong> The average Fortune
+                        500 Finance team spends 60–70% of their time gathering
+                        and cleaning data, and only 30% actually analysing it.
+                        Tools like OAC + FDI are supposed to flip that ratio.
+                        Has your internship team already felt this shift — or
+                        are they still spending most of their time on manual
+                        data prep?
+                    </div>
+                </div>
+                <div class="sec-label" style="margin-bottom: 0.4rem">
+                    Revisit on:
+                </div>
+                <div class="revisit-row">
+                    <span class="revisit-chip">Day 3</span>
+                    <span class="revisit-chip">Day 10</span>
+                    <span class="revisit-chip">Week 3</span>
+                    <span class="revisit-chip">Month 2</span>
+                    <span class="revisit-chip">Month 4</span>
+                </div>
+                <div class="quiz-section">
+                    <div class="qlabel">Active recall quiz</div>
+                    <div class="quiz-q">
+                        1. What four questions should you always ask when
+                        reading a chart?
+                    </div>
+                    <div class="quiz-q">
+                        2. What is the difference between a metric and a KPI?
+                    </div>
+                    <div class="quiz-q">
+                        3. What is the golden rule for exploring pre-built FDI
+                        dashboards safely?
+                    </div>
+                    <div class="quiz-q">
+                        4. Name the four main sections of OAC's top navigation
+                        bar and what each does.
+                    </div>
+                    <div class="quiz-q">
+                        5. You notice a spike in the chart. You right-click it.
+                        What OAC feature automatically explains why it happened?
+                    </div>
+                    <button class="reveal-btn" onclick="toggleAnswers('a4')">
+                        Show sample answers
+                    </button>
+                    <div id="a4" class="answer-box">
+                        <div class="answer-item">
+                            1. What is on the X axis? What is on the Y axis?
+                            What is the time period? What are the units of
+                            measurement?
+                        </div>
+                        <div class="answer-item">
+                            2. All KPIs are metrics, but not all metrics are
+                            KPIs. A metric is any measurable number. A KPI is a
+                            metric that leadership has designated as
+                            strategically important for decision-making.
+                        </div>
+                        <div class="answer-item">
+                            3. Always click "Save As" to create your own copy
+                            before making any edits. In View mode, filters are
+                            safe to use — they only affect your current session.
+                        </div>
+                        <div class="answer-item">
+                            4. Home (recent items) → Catalog (saved workbooks) →
+                            Data (datasets/connections) → Console (admin
+                            settings).
+                        </div>
+                        <div class="answer-item">
+                            5. The "Explain" feature — OAC uses machine learning
+                            to generate an automatic statistical explanation of
+                            the anomaly.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="post" class="module-panel">
+                <div class="meta-row">
+                    <span class="meta-pill"
+                        ><i class="ti ti-calendar" aria-hidden="true"></i>
+                        6-month plan after internship ends</span
+                    >
+                </div>
+
+                <div class="section">
+                    <div class="sec-label">
+                        Month 1–2: consolidation and practice projects
+                    </div>
+                    <div class="month-card">
+                        <div class="mhead">Month 1 — Rebuild from scratch</div>
+                        <div class="mbody">
+                            Complete all 4 OAC LiveLabs again, this time without
+                            guidance notes. Build the "My Department Dashboard"
+                            mini-project using a new dataset (download free HR
+                            data from Kaggle.com — search "HR employee
+                            dataset"). Goal: you should be able to build,
+                            filter, and share a 3-page OAC workbook without
+                            looking anything up.
+                        </div>
+                    </div>
+                    <div class="month-card">
+                        <div class="mhead">
+                            Month 2 — FDI deep dive + data literacy
+                        </div>
+                        <div class="mbody">
+                            Complete the FDI LiveLabs. Read Oracle's free e-book
+                            "Analytics and Data Literacy" (available at
+                            oracle.com/analytics). Join r/businessintelligence
+                            on Reddit and read the top 10 posts of all time —
+                            they'll teach you real-world analytics thinking
+                            beyond just Oracle tools.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="sec-label">Month 3–4: going deeper</div>
+                    <div class="month-card">
+                        <div class="mhead">Month 3 — Advanced OAC features</div>
+                        <div class="mbody">
+                            Learn OAC Data Flows (building automated data
+                            transformation pipelines). Learn about OAC's Machine
+                            Learning integration (there are free LiveLabs for
+                            this). Start learning basic SQL — it's not required
+                            for OAC/FDI, but knowing it makes you 10x more
+                            effective. Use SQLZoo.net (free, interactive SQL
+                            tutorials) for 30 min per day.
+                        </div>
+                    </div>
+                    <div class="month-card">
+                        <div class="mhead">
+                            Month 4 — FDI customisation basics
+                        </div>
+                        <div class="mbody">
+                            Learn how to add a custom metric to an FDI Subject
+                            Area. Learn how to create a custom Deck from
+                            scratch. Follow Oracle's official "Extending Fusion
+                            Analytics" documentation. Watch Oracle CloudWorld
+                            session recordings on YouTube (search "Oracle
+                            Analytics CloudWorld 2024").
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="sec-label">
+                        Month 5–6: portfolio and certification
+                    </div>
+                    <div class="month-card">
+                        <div class="mhead">
+                            Month 5 — Portfolio projects (all free with Oracle
+                            Free Tier)
+                        </div>
+                        <div class="mbody">
+                            <strong>Project 1:</strong> "Global Sales
+                            Performance Dashboard" — Download a free retail
+                            dataset from Kaggle, upload to OAC Free Tier, build
+                            a multi-page workbook with a world map, trend lines,
+                            and KPI tiles.<br /><br />
+                            <strong>Project 2:</strong> "HR Workforce Analytics"
+                            — Use Oracle's sample HCM data in the FDI LiveLab
+                            environment. Build custom KPI cards showing
+                            attrition, headcount growth, and average tenure.<br /><br />
+                            <strong>Project 3:</strong> "Finance Variance
+                            Analysis" — Build a dashboard answering "Which
+                            business units exceeded their Q3 expense budget and
+                            by how much?" using free sample financial data.
+                        </div>
+                    </div>
+                    <div class="month-card">
+                        <div class="mhead">
+                            Month 6 — Certification preparation
+                        </div>
+                        <div class="mbody">
+                            Study for Oracle Analytics Cloud 2024 Professional
+                            certification. Use Oracle University's free learning
+                            paths (education.oracle.com) to access the official
+                            exam preparation materials. Take the free practice
+                            exams Oracle provides.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="sec-label">
+                        Free Oracle certifications to pursue
+                    </div>
+                    <div class="cert-row">
+                        <div class="cert-item">
+                            <i class="ti ti-certificate" aria-hidden="true"></i>
+                            <div>
+                                <strong
+                                    >Oracle Analytics Cloud 2024
+                                    Professional</strong
+                                >
+                                — Most relevant. Tests OAC visualisation,
+                                semantic modelling, and data preparation. Exam
+                                guide and free prep materials at:
+                                <a
+                                    href="https://education.oracle.com/oracle-analytics-cloud-2024-certified-professional/trackp_OACP2024"
+                                    target="_blank"
+                                    >education.oracle.com/oracle-analytics-cloud-2024-certified-professional</a
+                                >
+                            </div>
+                        </div>
+                        <div class="cert-item">
+                            <i class="ti ti-certificate" aria-hidden="true"></i>
+                            <div>
+                                <strong
+                                    >Oracle Cloud Infrastructure Foundations
+                                    Associate</strong
+                                >
+                                — Free exam vouchers often available. Good
+                                foundation for understanding the cloud
+                                infrastructure OAC runs on. See:
+                                <a
+                                    href="https://education.oracle.com/oracle-cloud-infrastructure-2023-foundations-associate/trackp_OCIF2023"
+                                    target="_blank"
+                                    >education.oracle.com (search OCI
+                                    Foundations)</a
+                                >
+                            </div>
+                        </div>
+                        <div class="cert-item">
+                            <i class="ti ti-certificate" aria-hidden="true"></i>
+                            <div>
+                                <strong
+                                    >Oracle Fusion Analytics Warehouse
+                                    Implementation Professional</strong
+                                >
+                                — Advanced. Worth pursuing after 6 months of
+                                hands-on experience with FDI. Check:
+                                <a
+                                    href="https://education.oracle.com"
+                                    target="_blank"
+                                    >education.oracle.com</a
+                                >
+                                and search "Fusion Analytics Warehouse."
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="sec-label">Communities to join</div>
+                    <div class="concept-grid">
+                        <div class="concept-card">
+                            <div class="ctitle">Oracle Analytics Community</div>
+                            <div class="cdesc">
+                                Oracle's official forum for analytics questions.
+                                Real Oracle employees and experts answer
+                                questions. Visit:
+                                <a
+                                    href="https://community.oracle.com/tech/apps-infra/categories/oracle-analytics"
+                                    target="_blank"
+                                    style="color: #185fa5"
+                                    >community.oracle.com/tech/apps-infra/categories/oracle-analytics</a
+                                >
+                            </div>
+                        </div>
+                        <div class="concept-card">
+                            <div class="ctitle">
+                                Reddit: r/businessintelligence
+                            </div>
+                            <div class="cdesc">
+                                200,000+ members. Real-world BI career
+                                discussions, tool comparisons, and project
+                                advice. Visit:
+                                <a
+                                    href="https://reddit.com/r/businessintelligence"
+                                    target="_blank"
+                                    style="color: #185fa5"
+                                    >reddit.com/r/businessintelligence</a
+                                >
+                            </div>
+                        </div>
+                        <div class="concept-card">
+                            <div class="ctitle">Reddit: r/oracle</div>
+                            <div class="cdesc">
+                                Oracle product discussions, technical Q&A,
+                                career discussions. Visit:
+                                <a
+                                    href="https://reddit.com/r/oracle"
+                                    target="_blank"
+                                    style="color: #185fa5"
+                                    >reddit.com/r/oracle</a
+                                >
+                            </div>
+                        </div>
+                        <div class="concept-card">
+                            <div class="ctitle">Oracle ACE Community</div>
+                            <div class="cdesc">
+                                Oracle's community of independent experts who
+                                share deep technical knowledge. Their blogs are
+                                excellent free learning resources. Visit:
+                                <a
+                                    href="https://ace.oracle.com"
+                                    target="_blank"
+                                    style="color: #185fa5"
+                                    >ace.oracle.com</a
+                                >
+                            </div>
+                        </div>
+                        <div class="concept-card">
+                            <div class="ctitle">LinkedIn: Oracle Analytics</div>
+                            <div class="cdesc">
+                                Search "Oracle Analytics" on LinkedIn groups.
+                                The official Oracle Analytics LinkedIn page
+                                posts weekly tips, new feature demos, and
+                                customer stories worth following.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="sec-label">
+                        Free newsletters, podcasts & YouTube channels
+                    </div>
+                    <div class="resource-card">
+                        <span class="rtag rtag-video">YouTube</span>
+                        <div class="rname">
+                            Oracle Analytics — Official Channel
+                        </div>
+                        <div class="rdesc">
+                            Subscribe to stay current on every new OAC and FDI
+                            feature, with demo videos published weekly. The
+                            channel homepage shows a clean Oracle-branded layout
+                            with featured playlists for OAC, FDI, and Analytics
+                            Cloud Summit recordings.
+                        </div>
+                        <a
+                            href="https://www.youtube.com/@OracleAnalytics"
+                            target="_blank"
+                            >https://www.youtube.com/@OracleAnalytics</a
+                        >
+                    </div>
+                    <div class="resource-card">
+                        <span class="rtag rtag-free">Blog/Newsletter</span>
+                        <div class="rname">
+                            Oracle Analytics Blog — blogs.oracle.com/analytics
+                        </div>
+                        <div class="rdesc">
+                            Oracle's official analytics blog. The page shows a
+                            white/red Oracle-branded layout with article cards,
+                            each showing title, author, date, and a preview
+                            image. Subscribe via the email field in the right
+                            sidebar to get new posts weekly.
+                        </div>
+                        <a
+                            href="https://blogs.oracle.com/analytics"
+                            target="_blank"
+                            >https://blogs.oracle.com/analytics</a
+                        >
+                    </div>
+                    <div class="resource-card">
+                        <span class="rtag rtag-video">Podcast</span>
+                        <div class="rname">
+                            Oracle Analytics Podcast — Oracle Cloud Customer
+                            Connect
+                        </div>
+                        <div class="rdesc">
+                            Search "Oracle Analytics podcast" on Spotify or
+                            Apple Podcasts. Oracle publishes interviews with
+                            customers and product managers. Episodes run 20–40
+                            minutes and cover real implementation stories —
+                            excellent for understanding real-world use cases.
+                        </div>
+                        <a
+                            href="https://podcasts.apple.com/us/podcast/oracle-analytics-podcast/id1608413748"
+                            target="_blank"
+                            >https://podcasts.apple.com/us/podcast/oracle-analytics-podcast/id1608413748</a
+                        >
+                    </div>
+                    <div class="resource-card">
+                        <span class="rtag rtag-free">Community Blog</span>
+                        <div class="rname">
+                            Oracle Analytics: Tim Vlamis / Vlamis Software
+                        </div>
+                        <div class="rdesc">
+                            Vlamis Software is one of the most respected Oracle
+                            Analytics blogs in the community. Visit
+                            vlamis.com/blog for deep technical posts, new
+                            feature breakdowns, and certification tips — all
+                            free. The blog layout shows posts in reverse
+                            chronological order with clear titles and dates.
+                        </div>
+                        <a href="https://vlamis.com/blog" target="_blank"
+                            >https://vlamis.com/blog</a
+                        >
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <script>
+            function showModule(id) {
+                document
+                    .querySelectorAll(".module-panel")
+                    .forEach((p) => p.classList.remove("active"));
+                document
+                    .querySelectorAll(".nav-btn")
+                    .forEach((b) => b.classList.remove("active"));
+                document.getElementById(id).classList.add("active");
+                const btns = document.querySelectorAll(".nav-btn");
+                const ids = ["m0", "m1", "m2", "m3", "m4", "post"];
+                const idx = ids.indexOf(id);
+                if (idx >= 0) btns[idx].classList.add("active");
+                window.scrollTo(0, 0);
+            }
+            function toggleAnswers(id) {
+                const box = document.getElementById(id);
+                box.classList.toggle("open");
+                const btn = box.previousElementSibling;
+                btn.textContent = box.classList.contains("open")
+                    ? "Hide answers"
+                    : "Show sample answers";
+            }
+        </script>
+    </body>
+</html>
